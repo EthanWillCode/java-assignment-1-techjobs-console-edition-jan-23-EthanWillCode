@@ -25,7 +25,7 @@ public class JobData {
      * without duplicates, for a given column.
      *
      * @param field The column to retrieve values from
-     * @return List of all of the values of the given field
+     * @return List of all the values of the given field
      */
     public static ArrayList<String> findAll(String field) {
 
@@ -69,24 +69,18 @@ public class JobData {
      * @return List of all jobs matching the criteria
      */
     public static ArrayList<HashMap<String, String>> findByColumnAndValue(String column, String value) {
-
         // load data, if not already loaded
         loadData();
-
+        value = value.toLowerCase();
         ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
-
         for (HashMap<String, String> row : allJobs) {
-
-            String aValue = row.get(column);
-
+            String aValue = row.get(column).toLowerCase();
             if (aValue.contains(value)) {
                 jobs.add(row);
             }
         }
-
         return jobs;
     }
-
     /**
      * Search all columns for the given term
      *
@@ -94,12 +88,19 @@ public class JobData {
      * @return      List of all jobs with at least one field containing the value
      */
     public static ArrayList<HashMap<String, String>> findByValue(String value) {
-
         // load data, if not already loaded
         loadData();
-
-        // TODO - implement this method
-        return null;
+        value = value.toLowerCase();
+        ArrayList<HashMap<String, String>> jobsByValue = new ArrayList<>();
+        for (HashMap<String, String> row : allJobs) {
+            for(String key: row.keySet()) {
+                String aValue = row.get(key).toLowerCase();
+                if(aValue.contains(value) && !jobsByValue.contains(row)){
+                    jobsByValue.add(row);
+                }
+            }
+        }
+        return jobsByValue;
     }
 
     /**

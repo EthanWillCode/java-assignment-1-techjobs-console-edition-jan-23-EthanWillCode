@@ -125,16 +125,11 @@ public class TechJobs {
         if(someJobs.isEmpty()){
             System.out.println("No Results");
         } else {
-        for(HashMap job: someJobs) {
+        for(HashMap<String, String> job: someJobs) {
             System.out.println("*****");
-            for(Object column: job.keySet()){
-                System.out.println(column +": " + job.get(column));
+            for(String column: job.keySet()) {
+                System.out.println(column + ": " + job.get(column));
             }
-//            System.out.println("position type: " + job.get("position type"));
-//            System.out.println("name: " + job.get("name"));
-//            System.out.println("employer: " + job.get("employer"));
-//            System.out.println("location: " + job.get("location"));
-//            System.out.println("core competency: " + job.get("core competency"));
             System.out.println("*****");
             System.out.println(" ");
         }
